@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public class FileDownloadUtil {
     public static Resource getFileAsResponse(String fileCode) throws IOException {
-        Path uploadDirectory = Paths.get("File-Upload");
+        Path uploadDirectory = Paths.get("Files-Upload");
         Stream<Path> pathStream = Files.list(uploadDirectory).filter(file ->
            file.getFileName().toString().startsWith(fileCode));
         Optional<Path> path = pathStream.findFirst();
