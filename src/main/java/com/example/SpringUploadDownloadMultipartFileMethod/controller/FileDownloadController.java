@@ -20,7 +20,7 @@ public class FileDownloadController {
         try {
             resource = FileDownloadUtil.getFileAsResponse(fileName);
         } catch (IOException e) {
-            return ResponseEntity.internalServerError().build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("There is a problem!");
         }
         if(resource == null){
             return new ResponseEntity<>("File not found", HttpStatus.NOT_FOUND);
