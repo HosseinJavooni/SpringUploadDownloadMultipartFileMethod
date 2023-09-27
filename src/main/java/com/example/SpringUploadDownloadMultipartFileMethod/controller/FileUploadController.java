@@ -14,13 +14,17 @@ import java.util.UUID;
 
 @RestController
 public class FileUploadController {
+    FileUploadUtil fileUploadUtil;
+    public FileUploadController(FileUploadUtil fileUploadUtil){
+        this.fileUploadUtil = fileUploadUtil;
+    }
     @PostMapping("/uploadFile")
-    public ResponseEntity<FileUploadResponse> uploadFile(
-        @RequestParam("file")MultipartFile multipartFile) throws IOException {
+    public ResponseEntity<FileUploadResponse> uploadFile (
+        @RequestParam("file") MultipartFile multipartFile) throws Exception {
         String guid = UUID.randomUUID().toString();
         String fileName = guid + "_" + StringUtils.cleanPath(multipartFile.getOriginalFilename());
         long size = multipartFile.getSize();
-        FileUploadUtil.saveFile(fileName, multipartFile);
+        fileUploadUtil.saveFile(fileName, multipartFile);
         FileUploadResponse response = new FileUploadResponse();
         response.setFileName(fileName);
         response.setSize(size);
